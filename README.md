@@ -63,5 +63,4 @@ This dashboard allows users to explore climate data from 1880 to the present thr
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/climate-dashboard.git
-cd climate-dashboard
+git clone https://github.com/Da125673/Project.git
