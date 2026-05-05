@@ -64,3 +64,8 @@ This dashboard allows users to explore climate data from 1880 to the present thr
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/Da125673/Project.git
+cd Project
+
+pip install -r requirements.txt
+
+streamlit run app.py
