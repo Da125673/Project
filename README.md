@@ -26,6 +26,7 @@ This dashboard allows users to explore climate data from 1880 to the present thr
 ## 🔍 Key Features
 
 - Interactive time range selector:
+  - 1880-Present
   - 1880–1949
   - 1950–1999
   - 2000–Present
