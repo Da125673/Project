@@ -32,7 +32,7 @@ def load_data():
     df = pd.merge(temp, co2_yearly, on='Year')
     df = df.sort_values("Year")
 
-    # 🔥 Rolling averages (5-year)
+    # Rolling averages (5-year)
     df["Temp_Roll"] = df["Temp_Anomaly"].rolling(window=5).mean()
     df["CO2_Roll"] = df["CO2"].rolling(window=5).mean()
 
@@ -47,7 +47,7 @@ st.sidebar.header("Controls")
 
 view = st.sidebar.selectbox(
     "Select Time Range",
-    ["1880–1949", "1950–1999", "2000–Present"]
+    ["1880–Present", "1880–1949", "1950–1999", "2000–Present"]
 )
 
 mode = st.sidebar.radio(
@@ -60,7 +60,11 @@ use_smoothed = (mode == "Smoothed Trend (5-year avg)")
 # -----------------------
 # Filter Data
 # -----------------------
-if view == "1880–1949":
+if view == "1880–Present":
+    filtered = df
+    color = "white"
+
+elif view == "1880–1949":
     filtered = df[(df['Year'] >= 1880) & (df['Year'] <= 1949)]
     color = "blue"
 
@@ -73,6 +77,10 @@ else:
     color = "red"
 
 st.subheader(f"📅 Viewing: {view}")
+
+# Optional description for full dataset
+if view == "1880–Present":
+    st.caption("Full dataset view shows the long-term relationship between CO₂ and temperature.")
 
 # Choose columns based on mode
 temp_col = "Temp_Roll" if use_smoothed else "Temp_Anomaly"
@@ -134,7 +142,7 @@ with tab2:
     st.plotly_chart(fig3, use_container_width=True)
 
 # -----------------------
-# 📊 Dual Axis (BIG UPGRADE)
+# 📊 Dual Axis
 # -----------------------
 with tab3:
     fig = go.Figure()
@@ -164,7 +172,7 @@ with tab3:
     st.plotly_chart(fig, use_container_width=True)
 
 # -----------------------
-# 📉 BEFORE vs AFTER INDUSTRIALIZATION (NEW TAB)
+# 📉 Industrialization Comparison
 # -----------------------
 with tab4:
     pre = df[df["Year"] < 1950]
